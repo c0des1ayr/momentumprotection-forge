@@ -24,7 +24,12 @@ public class EnchantMomentumProtection extends Enchantment {
 
     @Override
     public int getMinCost(int level) {
-        return 20;
+        switch (level) {
+            case 5:
+                return 48;
+            default:
+                return 20;
+        }
     }
 
     @Override
@@ -33,7 +38,7 @@ public class EnchantMomentumProtection extends Enchantment {
     }
 
     @Override
-    public int getMaxLevel() {return 4;}
+    public int getMaxLevel() {return 5;}
 
 
     @Override
@@ -49,8 +54,14 @@ public class EnchantMomentumProtection extends Enchantment {
             if(ElytraItem.isFlyEnabled(chestPlate)) {
                 int enchantLvl = EnchantmentHelper.getItemEnchantmentLevel(MomentumProtection.momentumprotection, chestPlate);
                 if(enchantLvl > 0) {
-                    if (damageEvent.getSource() == DamageSource.FLY_INTO_WALL) {
-                        damageEvent.setAmount((damageEvent.getAmount() * (0.95F / enchantLvl)));
+                    if(damageEvent.getSource() == DamageSource.FLY_INTO_WALL) {
+                        switch (enchantLvl) {
+                            case 5:
+                                damageEvent.setAmount(((0F)));
+                                break;
+                            default:
+                                damageEvent.setAmount((damageEvent.getAmount() * (0.95F / enchantLvl)));
+                        }
                     }
                 }
             }
