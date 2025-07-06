@@ -56,8 +56,9 @@ public class EnchantMomentumProtection extends Enchantment {
                 if(enchantLvl > 0) {
                     if(damageEvent.getSource() == DamageSource.FLY_INTO_WALL) {
                         switch (enchantLvl) {
-                            case 5:
-                                damageEvent.setAmount(((0F)));
+                            case 5: //if you have a level 5 elytra
+                                damageEvent.setAmount(0F);
+                                damageEvent.setCanceled(true); //negate all damage
                                 break;
                             default:
                                 damageEvent.setAmount((damageEvent.getAmount() * (0.95F / enchantLvl)));
